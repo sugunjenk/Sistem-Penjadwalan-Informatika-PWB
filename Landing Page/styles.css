@@ -1,0 +1,145 @@
+/* Global Styles */
+
+* {
+  padding: 10px;
+}
+
+html, body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header Styles */
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+header h1 {
+  margin: 0;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Hero Section Styles */
+#hero {
+  background-color: #f2f2f2;
+  text-align: center;
+  padding: 100px 0;
+
+  /* This image is 687 wide by 1024 tall, similar to your aspect ratio */
+  background-image: url(' https://thumbs.dreamstime.com/b/time-management-deadline-schedule-concept-yellow-clock-background-150161933.jpg');
+    
+  /* make a square container */
+  /* width: 150px;
+  height: 150px; */
+
+  /* fill the container, preserving aspect ratio, and cropping to fit */
+  background-size: cover;
+
+  /* center the image vertically and horizontally */
+  background-position: top center;
+
+  /* round the edges to a circle with border radius 1/2 container size */
+  /* border-radius: 50%; */
+}
+
+#hero > *{
+  color: #FFF;
+}
+
+#hero h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+#hero p {
+  font-size: 18px;
+  /* color: #777; */
+  margin-bottom: 40px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: #555;
+}
+
+/* Sections Styles */
+section {
+  padding: 80px 0;
+}
+
+section h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+section p {
+  font-size: 18px;
+  /* color: #777; */
+  margin-bottom: 40px;
+}
+
+ul {
+  list-style-type: disc;
+  margin-left: 40px;
+}
+
+/* Form Styles */
+form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form input[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Footer Styles */
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}  
