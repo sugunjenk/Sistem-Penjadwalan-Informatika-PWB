@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     mysqli_close($conn);
 
     // Redirect to a success page or display a success message
-    header('Location: login.html'); // Replace 'success.html' with your actual success page
+    header('Location: index.html'); // Replace 'success.html' with your actual success page
     exit;
 }
 ?>
