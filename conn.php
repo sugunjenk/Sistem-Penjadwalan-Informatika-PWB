@@ -9,5 +9,17 @@ $password = '125125'; // Replace with your actual database password
 $conn = new mysqli($host,$username,$password,$dbName);
 // if($conn) echo "connected";
 // else echo "not connected";
-
+function add_mahasiswa($name,$nim,$email,$password,$class,$angkatan){
+    global $conn;
+    $query = "INSERT INTO mahasiswa (fullname, nim, email, pass, kelas, angkatan) 
+    VALUES ('$name', $nim, '$email', '$password','$class','$angkatan')";
+    
+    if (mysqli_query($conn, $query)) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $query . "<br>" . mysqli_error($conn);
+    }
+    
+    mysqli_close($conn);
+}
 ?>

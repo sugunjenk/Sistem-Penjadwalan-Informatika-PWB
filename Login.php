@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     // Prepare and execute the SQL statement
-    $stmt = $conn->prepare("SELECT * FROM mahasiswa WHERE email = '$email' AND password = '$password'");
+    $stmt = $conn->prepare("SELECT * FROM mahasiswa WHERE email = '$email' AND pass = '$password'");
     
     // ni bikin error
     // $stmt->bind_param("ss", $email, $password);

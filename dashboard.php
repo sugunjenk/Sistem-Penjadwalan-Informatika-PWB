@@ -8,7 +8,7 @@
       echo "Welcome, $email! This is your dashboard.";
   } else {
       // Session doesn't exist or username is not set, redirect to the login page
-      header("Location: login view.php");
+      header("Location: index.html");
       exit();
   }
 
