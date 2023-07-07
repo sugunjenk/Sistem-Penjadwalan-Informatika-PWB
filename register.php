@@ -32,20 +32,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $class_row = mysqli_fetch_assoc($class_row);
         $class_id = $class_row['id'];
 
-        // Menambahkan jumlah mahasiswa
+        // Update jumlah mahasiswa
+        $query = "UPDATE kelas SET jumlah_mahasiswa = jumlah_mahasiswa + 1 WHERE id = $class_id";
+        mysqli_query($conn,$query);
+
         // Menambahkan data di tabel mahasiswa
         $query = "INSERT INTO mahasiswa (id_user, kelas) VALUES ($nim,$class_id)";
         mysqli_query($conn,$query);
+        
+        header('Location: dashboardMahasiswa.php');
+        exit;
     }
-    // Retrieve form data
+
     
-    
-    
-    
-    
-    // Redirect to a success page or display a success message
-    header('Location: index.html'); // Replace 'success.html' with your actual success page
-    exit;
+
 }
 
 function gagal_regis($msg_error){
