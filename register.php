@@ -2,16 +2,11 @@
 include("conn.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nim = $_POST['nim'];
     $email = $_POST['email'];
     $name = $_POST['name'];
     $username =  $_POST['username'];
     $password = $_POST['password'];
-    // Apakah NIM sudah ada di DB
-    $query = "SELECT * FROM user WHERE id = '$nim'";
-    if(mysqli_num_rows(mysqli_query($conn,$query)) !== 0){
-        gagal_regis('NIM Sudah Terdaftar');
-    }
+    
     // Apakah Email sudah ada di DB
     $query = "SELECT * FROM user WHERE email = '$email'";
     if(mysqli_num_rows(mysqli_query($conn,$query)) !== 0){
@@ -20,8 +15,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $role = $_POST['category'];
     if($role === 'mahasiswa'){
+        // Apakah NIM sudah ada di DB
+        $nim = $_POST['nim'];
+        $query = "SELECT * FROM user WHERE id = '$nim'";
+        if(mysqli_num_rows(mysqli_query($conn,$query)) !== 0){
+            gagal_regis('NIM Sudah Terdaftar');
+        }
+
         // Menambahkan User
         add_user_table($conn, $name,$username,$nim,$email,$password,$role);
+        
         // Memeriksa apakah kelas sudah benar
         $class = $_POST['class'];
         $query = "SELECT * FROM kelas WHERE nama_kode_kelas = '$class'";
@@ -42,6 +45,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         header('Location: dashboardMahasiswa.php');
         exit;
+    }elseif($role === 'dosen'){
+        // Memeriksa NIP
+        $nip = $_POST['nip'];
+        $query = "SELECT * FROM user WHERE id = '$nip'";
+        if(mysqli_num_rows(mysqli_query($conn,$query)) !== 0){
+            gagal_regis('NIP Sudah Terdaftar');
+        }
+        // Menambahkan User
+        add_user_table($conn, $name,$username,$nip,$email,$password,$role);
+
+        // Menambahkan data di tabel dosen
+        $query = "INSERT INTO dosen (id_user) VALUES ($nip)";
+        mysqli_query($conn,$query);
+
     }
 
     
@@ -63,6 +80,7 @@ function add_user_table($conn, $name, $username, $nim,$email,$password,$role){
         echo "Error: " . $query . "<br>" . mysqli_error($conn);
     }
     // mysqli_close($conn);
-
+    header('Location: dashboardDosen.php');
+    exit;
 }
 ?>
