@@ -14,7 +14,7 @@
           <label for="category">Jenis Pendaftaran:</label>
           <div>
             <label for="mahasiswa">Mahasiswa</label>
-            <input type="radio" id="mahasiswa" name="category" value="mahasiswa" checked>
+            <input type="radio" id="mahasiswa" name="category" value="user" checked>
           </div>
           <div>
             <label for="dosen">Dosen</label>
@@ -24,6 +24,10 @@
         <div>
           <label for="name">Nama :</label>
           <input type="text" id="name" name="name">
+        </div>
+        <div>
+          <label for="username">Username :</label>
+          <input type="text" id="username" name="username">
         </div>
         <div>
           <label for="email">Email :</label>
@@ -41,10 +45,6 @@
           <label for="class">Kelas :</label>
           <input type="text" id="class" name="class">
         </div>
-        <div id="angkatan-container">
-          <label for="angkatan">Angkatan :</label>
-          <input type="text" id="angkatan" name="angkatan">
-        </div>
         <div>
           <label for="password">Password :</label>
           <input type="password" id="password" name="password">
@@ -57,7 +57,7 @@
     </form>
       
     <script>
-        const mahaFields = ['class', 'angkatan', 'nim'];
+        const mahaFields = ['class', 'nim'];
         const dosenFields = ['nip'];
         
         const categoryRadios = document.getElementsByName('category');
@@ -81,8 +81,8 @@
 
         
         function showFields(category) {
-          const fieldsToShow = category === 'mahasiswa' ? mahaFields : dosenFields;
-          const fieldsToHide = category === 'mahasiswa' ? dosenFields : mahaFields;
+          const fieldsToShow = category === 'user' ? mahaFields : dosenFields;
+          const fieldsToHide = category === 'user' ? dosenFields : mahaFields;
           
           fieldsToShow.forEach((field) => {
             document.getElementById(`${field}-container`).style.display = 'flex';

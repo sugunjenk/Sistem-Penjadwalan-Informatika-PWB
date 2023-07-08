@@ -7,27 +7,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Prepare and execute the SQL statement
-    $stmt = $conn->prepare("SELECT * FROM mahasiswa WHERE email = '$email' AND password = '$password'");
-    
-    // ni bikin error
-    // $stmt->bind_param("ss", $email, $password);
-    $stmt->execute();
-    $result = $stmt->get_result();
 
-    // Check if a matching row is found
-    if ($result->num_rows === 1) {
-        // Login successful
-        $_SESSION['email'] = $email;
-        echo json_encode(['status' => 'success', 'message' => 'Login berhasil!']);
-        header('Location: dashboard.php');
-    } else {
-        // Invalid login
-        echo json_encode(['status' => 'error', 'message' => 'Email atau password salah. Silakan coba lagi.']);
+    $result = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email' AND password = '$password'");
+    if(mysqli_num_rows($result) === 1){
+        $temp = mysqli_fetch_assoc($result);
+        var_dump($temp);
+        $_SESSION[$username] = $temp['username'];
+        if($temp['role'] === 'admin'){
+            header('Location: dashboardAdmin.php');
+        }elseif($temp['role'] === 'user'){
+            header('Location: dashboardMahasiswa.php');
+        }else{
+            header('Location: dashboardAdmin.php');
+        }
+        exit;
+
+    }else{
+        header('Location: index.html');
+        exit;
     }
-
-    // Close the statement and database connection
-    $stmt->close();
-    $conn->close();
 }
 ?>
