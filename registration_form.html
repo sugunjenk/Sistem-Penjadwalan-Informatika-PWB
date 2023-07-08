@@ -14,7 +14,7 @@
           <label for="category">Jenis Pendaftaran:</label>
           <div>
             <label for="mahasiswa">Mahasiswa</label>
-            <input type="radio" id="mahasiswa" name="category" value="mahasiswa" checked>
+            <input type="radio" id="mahasiswa" name="category" value="user" checked>
           </div>
           <div>
             <label for="dosen">Dosen</label>
@@ -81,8 +81,8 @@
 
         
         function showFields(category) {
-          const fieldsToShow = category === 'mahasiswa' ? mahaFields : dosenFields;
-          const fieldsToHide = category === 'mahasiswa' ? dosenFields : mahaFields;
+          const fieldsToShow = category === 'user' ? mahaFields : dosenFields;
+          const fieldsToHide = category === 'user' ? dosenFields : mahaFields;
           
           fieldsToShow.forEach((field) => {
             document.getElementById(`${field}-container`).style.display = 'flex';

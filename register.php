@@ -1,5 +1,6 @@
 <?php
 include("conn.php");
+session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
@@ -13,8 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         gagal_regis('Email Sudah Terdaftar');
     }
 
+    // Apakah username sudah ada di DB
+    $query = "SELECT * FROM user WHERE username = '$username'";
+    if(mysqli_num_rows(mysqli_query($conn,$query)) !== 0){
+        gagal_regis('Username Sudah Terdaftar');
+    }
+
     $role = $_POST['category'];
-    if($role === 'mahasiswa'){
+    if($role === 'user'){
         // Apakah NIM sudah ada di DB
         $nim = $_POST['nim'];
         $query = "SELECT * FROM user WHERE id = '$nim'";
@@ -43,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $query = "INSERT INTO mahasiswa (id_user, kelas) VALUES ($nim,$class_id)";
         mysqli_query($conn,$query);
         
+        $_SESSION['username'] = $username;
         header('Location: dashboardMahasiswa.php');
         exit;
     }elseif($role === 'dosen'){
@@ -58,7 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Menambahkan data di tabel dosen
         $query = "INSERT INTO dosen (id_user) VALUES ($nip)";
         mysqli_query($conn,$query);
-
+        
+        $_SESSION['username'] = $username;
+        header('Location: dashboardDosen.php');
+        exit;
     }
 
     
@@ -80,7 +91,6 @@ function add_user_table($conn, $name, $username, $nim,$email,$password,$role){
         echo "Error: " . $query . "<br>" . mysqli_error($conn);
     }
     // mysqli_close($conn);
-    header('Location: dashboardDosen.php');
-    exit;
+    
 }
 ?>
